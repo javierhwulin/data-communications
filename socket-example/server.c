@@ -1,4 +1,7 @@
+#include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
+#include <unistd.h>    
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -28,7 +31,7 @@ int main(int argc, char *argv[]){
         error("Error opening socket");
 
     // Initialize server address structure
-    bzero((char *) &serv_addr, sizeof(serv_addr)); // Zero out the server address structure
+    memset((char *) &serv_addr, 0, sizeof(serv_addr)); // Zero out the server address structure
     portno = atoi(argv[1]);  // Convert the provided port number from string to integer
     serv_addr.sin_family = AF_INET; // Set the address family to IPv4
     serv_addr.sin_port = htons(portno); // Convert port number to network byte order
@@ -49,7 +52,7 @@ int main(int argc, char *argv[]){
         error("Error on accept");
 
     // Clear the buffer for receiving the message
-    bzero(buffer, 256);
+    memset(buffer, 0, 256);
 
     // Read the message sent by the client into the buffer
     n = read(newsockfd, buffer, 255); // Read up to 255 characters from the client

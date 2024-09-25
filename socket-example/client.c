@@ -1,7 +1,10 @@
-#include <stdio.h>          // Standard I/O functions
-#include <sys/types.h>      // Data types used in system calls
-#include <netinet/in.h>     // Structures for internet domain addresses
-#include <netdb.h>          // Definition for network database operations
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>          
+#include <sys/types.h>      
+#include <netinet/in.h>     
+#include <netdb.h>         
 
 // Function to print an error message and exit the program
 void error(char *msg){
@@ -37,11 +40,11 @@ int main(int argc, char *argv[]){
     }
 
     // Initialize the server address structure
-    bzero((char *) &serv_addr, sizeof(serv_addr));  // Zero out the server address structure
+    memset((char *) &serv_addr, 0, sizeof(serv_addr));  // Zero out the server address structure
     serv_addr.sin_family = AF_INET;  // Set the address family to IPv4
 
     // Copy the server's IP address from the hostent structure to the server address structure
-    bcopy((char *)server->h_addr_list[0], (char *)&serv_addr.sin_addr.s_addr, server->h_length);
+    memcpy((char *)server->h_addr_list[0], (char *)&serv_addr.sin_addr.s_addr, server->h_length);
 
     serv_addr.sin_port = htons(portno);  // Convert the port number to network byte order
 
