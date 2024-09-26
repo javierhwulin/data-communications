@@ -7,7 +7,7 @@
 #include <arpa/inet.h>
 
 #define BROADCAST_PORT 49152
-#define BROADCAST_IP 
+#define BROADCAST_IP "0"
 #define MESSAGE "Hello, good afternoon"
 
 int main(int argc, char *argv[]){
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
     broadcast_addr.sin_port = htons(BROADCAST_PORT);
     broadcast_addr.sin_addr.s_addr = inet_addr(BROADCAST_IP);
     
-    send_result = sendto(sockfd, MESSAGE, sizeof(MESSAGE), 0, (struct sockaddr*)&broadcast_addr, len(broadcast_addr));
+    send_result = sendto(sockfd, MESSAGE, sizeof(MESSAGE), 0, (struct sockaddr*)&broadcast_addr, sizeof(broadcast_addr));
     if(send_result < 0) {
         perror("Send message failed");
         close(sockfd);
