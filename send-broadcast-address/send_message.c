@@ -7,7 +7,7 @@
 #include <arpa/inet.h>
 
 #define BROADCAST_PORT 49152
-#define BROADCAST_IP "0"
+#define BROADCAST_IP "10.0.2.255"
 #define MESSAGE "Hello, good afternoon"
 
 int main(int argc, char *argv[]){
