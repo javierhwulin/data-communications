@@ -13,6 +13,7 @@ int main(int argc, char *argv[]){
     char buffer[256];
     struct sockaddr_in serv_addr;
     struct hostent *server;
+    int rcvbuf_size = 1024 * 1024; // 1 MB buffer size
 
     if(argc < 3){
         fprintf(stderr, "usage %s hostname port\n", argv[0]);
@@ -22,6 +23,12 @@ int main(int argc, char *argv[]){
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if(sockfd < 0){
         perror("Error on creating socket");
+        exit(EXIT_FAILURE);
+    }
+
+    if (setsockopt(sockfd, SOL_SOCKET, SO_RCVBUF, &rcvbuf_size, sizeof(rcvbuf_size)) < 0) {
+        perror("Error setting SO_RCVBUF");
+        close(sockfd);
         exit(EXIT_FAILURE);
     }
 

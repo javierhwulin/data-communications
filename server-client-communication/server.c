@@ -13,6 +13,8 @@ int main(int argc, char *argv[]){
     int sockfd, newsockfd, portno, cli_len, n;
     struct sockaddr_in serv_addr, cli_addr;
     char buffer[256];
+    int rcvbuf_size = 1024 * 1024; // 1 MB buffer size
+
 
     if(argc < 2){
         fprintf(stderr, "Error, no port provided,\n");
@@ -23,6 +25,12 @@ int main(int argc, char *argv[]){
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if(sockfd < 0){
         perror("Socket creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (setsockopt(sockfd, SOL_SOCKET, SO_RCVBUF, &rcvbuf_size, sizeof(rcvbuf_size)) < 0) {
+        perror("Error setting SO_RCVBUF");
+        close(sockfd);
         exit(EXIT_FAILURE);
     }
 
