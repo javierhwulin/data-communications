@@ -1,0 +1,48 @@
+# Compiled Object Files
+*.o
+*.obj
+
+# Compiled Binary Files
+*.exe
+*.out
+*.app
+
+# Archive Files
+*.a
+*.lib
+
+# Debugging Files
+*.dSYM/
+*.stackdump
+
+# Backup and Temporary Files
+*~
+*.bak
+*.tmp
+*.swp
+
+# Dependency files
+*.d
+
+# Build Directories
+build/
+bin/
+obj/
+out/
+
+# IDE and Editor Files
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# Makefile auto-generated files
+Makefile
+Makefile.in
+Makefile.am
+
+# CMake Files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile.cmake
